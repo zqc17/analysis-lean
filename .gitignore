@@ -1,0 +1,6 @@
+# mdbook
+book
+md/build/*.md
+
+# lean project
+.lake
