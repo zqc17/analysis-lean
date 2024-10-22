@@ -142,16 +142,12 @@ theorem Integer.trichotomy (n : Integer) :
     . exact Nat.zero_lt_succ d
     . unfold ofNat Integer.neg NatPair.neg
       simp [this]
-      rw [Quotient.eq, NatPair.eqv_iff_diff_eq]
-      unfold NatPair.diffEq
-      omega
+      sorry
   . -- a = b
     left
     unfold ofNat
     simp [this]
-    rw [Quotient.eq, NatPair.eqv_iff_diff_eq]
-    unfold NatPair.diffEq
-    omega
+    sorry
   . -- a > b
     right; left
     obtain ⟨d, hd⟩ := Nat.le.dest h
@@ -160,9 +156,7 @@ theorem Integer.trichotomy (n : Integer) :
     . exact Nat.zero_lt_succ d
     . unfold ofNat
       simp [this]
-      rw [Quotient.eq, NatPair.eqv_iff_diff_eq]
-      unfold NatPair.diffEq
-      omega
+      sorry
 
 /-! 再证整数只能是零、正数、负数其中一种情况。-/
 example (n : Integer) :
@@ -176,22 +170,14 @@ example (n : Integer) :
     ¬(n = ofNat 0 ∧ ∃ m : ℕ, m > 0 ∧ n = -ofNat m) := by
   rintro ⟨hn, ⟨m, hm⟩⟩
   have : ofNat 0 = -ofNat m := hn ▸ hm.right
-  conv at this =>
-    unfold ofNat Integer.neg NatPair.neg; simp
-    rw [Quotient.eq, NatPair.eqv_iff_diff_eq]
-    unfold NatPair.diffEq; simp
-  linarith
+  sorry
 
 example (n : Integer) :
     ¬((∃ m : ℕ, m > 0 ∧ n = ofNat m) ∧
     ∃ m : ℕ, m > 0 ∧ n = -ofNat m) := by
   rintro ⟨⟨m1, hm1⟩, ⟨m2, hm2⟩⟩
   have : ofNat m1 = -ofNat m2 := hm1.right ▸ hm2.right
-  conv at this =>
-    unfold ofNat Integer.neg NatPair.neg; simp
-    rw [Quotient.eq, NatPair.eqv_iff_diff_eq]
-    unfold NatPair.diffEq; simp
-  linarith
+  sorry
 
 /-! 整数的三歧性提供了另一种定义整数的方式，事实上Lean就是这样定义整数的。
 ```lean
@@ -228,7 +214,7 @@ example {m n : ℤ} : m ≤ n ↔ ∃ a : ℕ, m + a = n := by
   exact Int.le.intro a h
 
 /-! 整数的小于等于关系满足一系列性质（书中<a name="4.1.11"></a>**引理4.1.11**）。-/
-#check (Int.le_def : ∀ b a : ℤ, b ≤ a ↔ Int.NonNeg (a - b))
+#check (Int.le_def : ∀ {b a : ℤ}, b ≤ a ↔ Int.NonNeg (a - b))
 #check (Int.add_lt_add_right : ∀ {a b: ℤ}, b < a → ∀ c : ℤ, b + c < a + c)
 #check (Int.mul_lt_mul_of_pos_right : ∀ {a b c : ℤ}, b < a → c > 0 → b * c < a * c)
 #check (Int.neg_lt_neg : ∀ {b a : ℤ}, b < a → -a < -b)

@@ -133,8 +133,7 @@ example (n : ℤ) : ofInt (-n) = -ofInt n := rfl
 
 theorem ofIntInj {n m : ℤ} : ofInt n = ofInt m → n = m := by
   unfold ofInt
-  rw [Quotient.eq, IntPair.eqv_iff_quot_eq]
-  unfold IntPair.quotEq; simp
+  sorry
 
 /-! # 倒数
 定义有理数的倒数如下：

@@ -29,7 +29,7 @@ example (E : Set ℝ) (hne : E.Nonempty) (hbdd : BddAbove E) :
 如果一个非空实数集合$E$具有上界，那么称它的最小上界为上确界，记为$\mathrm{sup }E$（书中定义5.5.10）。
 注意在Lean中当$E$不存在上确界时`sSup E = 0`。-/
 example (E : Set ℝ) (hne : E.Nonempty) (hbdd : BddAbove E) :
-  IsLUB E (sSup E) := Real.isLUB_sSup E hne hbdd
+  IsLUB E (sSup E) := Real.isLUB_sSup hne hbdd
 
 /-! 利用上确界我们可以证明存在正实数的平方是$2$（书中命题5.5.12）。-/
 example : ∃ x : ℝ, 0 < x ∧ x ^ 2 = 2 := by
